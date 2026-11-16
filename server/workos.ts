@@ -8,7 +8,9 @@ import { env } from 'void/env';
 const SESSION_COOKIE = '__Host-session';
 const STATE_COOKIE = '__Host-login_state';
 
-export const workos = () => new WorkOS(env.WORKOS_API_KEY, { clientId: env.WORKOS_CLIENT_ID });
+// isolate の中で使い回し、SDK が持つ JWKS のキャッシュを要求をまたいで残す。利用者ごとのセッションは要求の中だけで作る
+let client: WorkOS | undefined;
+export const workos = () => (client ??= new WorkOS(env.WORKOS_API_KEY, { clientId: env.WORKOS_CLIENT_ID }));
 
 const cookieOptions = { path: '/', httpOnly: true, secure: true, sameSite: 'Lax' } as const;
 
@@ -48,7 +50,7 @@ export async function currentUser(c: Context) {
   if (!sessionData) return null;
   const session = workos().userManagement.loadSealedSession({ sessionData, cookiePassword: env.WORKOS_COOKIE_PASSWORD });
   const auth = await session.authenticate();
-  if (auth.authenticated) return { user: auth.user, session };
+  if (auth.authenticated) return { user: auth.user, sessionId: auth.sessionId };
   const refreshed = await session.refresh({ cookiePassword: env.WORKOS_COOKIE_PASSWORD });
   if (!refreshed.authenticated && 'retryable' in refreshed && refreshed.retryable) throw new SessionUnavailable();
   if (!refreshed.authenticated || !refreshed.sealedSession) {
@@ -56,7 +58,7 @@ export async function currentUser(c: Context) {
     return null;
   }
   saveSession(c, refreshed.sealedSession);
-  return { user: refreshed.user, session: workos().userManagement.loadSealedSession({ sessionData: refreshed.sealedSession, cookiePassword: env.WORKOS_COOKIE_PASSWORD }) };
+  return { user: refreshed.user, sessionId: refreshed.sessionId };
 }
 
 /** 利用者を developers の organization に入れる。WorkOS の API キーは organization に属する必要がある */

@@ -10,10 +10,15 @@
     "types": [
       "void/env",
       "vite/client"
-    ]
+    ],
+    "jsx": "react-jsx"
   },
   "include": [
+    "env.ts",
+    "middleware",
+    "pages",
     "routes",
+    "server",
     "void.config.ts",
     "vite.config.ts"
   ]

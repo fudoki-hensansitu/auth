@@ -10,7 +10,8 @@
 .
 ├── pages/           # 頁（React）。ログイン前の案内と、API Keys widget・ログアウト・退会
 ├── routes/          # Void の route。ログイン（/login・/callback）・/logout・/account/delete・/widget-token
-├── server/          # WorkOS の client とセッションの cookie
+├── middleware/      # 全応答の header（iframe に埋めさせない）
+├── server/          # WorkOS の client とセッションの cookie（__Host-）・POST の Origin の検査
 ├── docs/            # この repo の設計・判断（tracked）
 ├── env.ts           # WorkOS の値の schema（値は .env と Void の secret）
 ├── void.config.ts   # Worker 名（auth）。入口・account は deploy を決めるときに足す

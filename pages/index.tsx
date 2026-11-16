@@ -10,7 +10,15 @@ async function widgetToken(): Promise<string> {
   return ((await res.json()) as { token: string }).token;
 }
 
-export default function Account({ email }: Props) {
+export default function Account({ email, unavailable }: Props) {
+  if (unavailable) {
+    return (
+      <main className="page">
+        <h1>API キー</h1>
+        <p>ログインの確認ができませんでした。時間をおいて頁を読み込み直してください。</p>
+      </main>
+    );
+  }
   if (!email) {
     return (
       <main className="page">

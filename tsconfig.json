@@ -15,6 +15,7 @@
   },
   "include": [
     "env.ts",
+    "middleware",
     "pages",
     "routes",
     "server",

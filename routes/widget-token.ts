@@ -1,11 +1,15 @@
 import { defineHandler } from 'void';
 import { env } from 'void/env';
-import { currentUser, workos } from '../server/workos';
+import { currentUser, SessionUnavailable, workos } from '../server/workos';
 
 // API Keys widget の token。本人のキーだけを扱える scope にし、ログインしている利用者にだけ出す。
 // widget は token が切れると取り直すので、頁に埋めずにここから渡す
 export const GET = defineHandler(async (c) => {
-  const current = await currentUser(c);
+  const current = await currentUser(c).catch((e) => {
+    if (e instanceof SessionUnavailable) return 'unavailable' as const;
+    throw e;
+  });
+  if (current === 'unavailable') return c.json({ error: '時間をおいて試してください' }, 503);
   if (!current) return c.json({ error: 'ログインしてください' }, 401);
   const { token } = await workos().widgets.createToken({
     organizationId: env.WORKOS_DEVELOPERS_ORG_ID,

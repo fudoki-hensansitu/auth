@@ -4,12 +4,25 @@ import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 import { WorkOS } from '@workos-inc/node';
 import { env } from 'void/env';
 
-const SESSION_COOKIE = 'session';
-const STATE_COOKIE = 'login_state';
+// __Host- を付け、隣のサブドメイン（*.fudoki.dev）から cookie を置かせない（login CSRF を防ぐ）
+const SESSION_COOKIE = '__Host-session';
+const STATE_COOKIE = '__Host-login_state';
 
 export const workos = () => new WorkOS(env.WORKOS_API_KEY, { clientId: env.WORKOS_CLIENT_ID });
 
 const cookieOptions = { path: '/', httpOnly: true, secure: true, sameSite: 'Lax' } as const;
+
+/** WorkOS が一時的に答えない。cookie は残し、時間をおいてもらう */
+export class SessionUnavailable extends Error {}
+
+/**
+ * 状態を変える POST が自分の頁から来たことを確かめる。SameSite=Lax は同じ site（*.fudoki.dev の他のサブドメイン）からの POST に cookie を送るので、Origin で絞る
+ */
+export function sameOrigin(c: Context): boolean {
+  const origin = c.req.header('origin');
+  if (origin) return origin === new URL(c.req.url).origin;
+  return c.req.header('sec-fetch-site') === 'same-origin';
+}
 
 export const callbackUrl = (c: Context) => new URL('/callback', c.req.url).toString();
 
@@ -37,6 +50,7 @@ export async function currentUser(c: Context) {
   const auth = await session.authenticate();
   if (auth.authenticated) return { user: auth.user, session };
   const refreshed = await session.refresh({ cookiePassword: env.WORKOS_COOKIE_PASSWORD });
+  if (!refreshed.authenticated && 'retryable' in refreshed && refreshed.retryable) throw new SessionUnavailable();
   if (!refreshed.authenticated || !refreshed.sealedSession) {
     clearSession(c);
     return null;

@@ -47,6 +47,7 @@ mise exec -- bun run check   # 型検査
 ## Skills
 
 - Void でアプリを作る・CLI を使うとき → `.agents/skills/void/`（`voidzero-dev/void` から skillctrl で取得。取得元と hash は `skills-lock.json`・`.agents/skillctrl/`）。Claude Code へは `.claude/skills/` の相対 symlink で渡す
+- WorkOS（AuthKit・API キー・セッション）を触るとき → `.agents/skills/workos/`、API Keys widget を触るとき → `.agents/skills/workos-widgets/`（どちらも `workos/skills` から skillctrl で取得。取得元と hash は同上）
 
 ## レビュー
 

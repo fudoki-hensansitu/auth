@@ -11,3 +11,7 @@ mise install
 mise exec -- bun install
 mise exec -- bun run dev
 ```
+
+## License
+
+[MIT](LICENSE)

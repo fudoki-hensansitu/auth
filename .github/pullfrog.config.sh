@@ -23,7 +23,7 @@ pf_set enabled 'true'
 pf_unset model   # inherit org default (wwwyo/dotfiles .github/pullfrog.org.config.sh); pf_set here to override
 pf_unset effort  # inherit org default
 pf_set progress-comments 'true'
-pf_set oss 'false'
+pf_set oss 'true'
 pf_set push 'enabled'
 pf_set shell 'restricted'
 pf_set signed-commits 'false'
@@ -32,7 +32,7 @@ pf_set mention.enabled 'true'
 pf_set mention.non-collaborators 'false'
 pf_set review.mode 'agent'
 pf_set review.non-collaborators 'false'
-pf_set review.re-review 'false'  # private: 追加コミットのレビューは @pullfrog で依頼する
+pf_set review.re-review 'true'
 pf_set review.approve 'false'
 pf_set review.drafts 'true'
 pf_set review.own-prs 'false'

@@ -2,14 +2,17 @@
 
 風土記（fudoki）や補助金など、fudoki-hensansitu のサービスに共通するアカウントの頁。Cloudflare Worker を1つ作り `auth.fudoki.dev` で出す。持つ機能は Google ログインと、API キーの発行・一覧・失効だけで、どちらも WorkOS（AuthKit と、user scope の API Keys widget）に任せる。退会は WorkOS の利用者削除で行う。fudoki 以外のサービスのキーも同じ頁で発行するので、fudoki とは別の repo にしている。
 
-設計の正本は fudoki の [dd.md](https://github.com/fudoki-hensansitu/fudoki/blob/main/docs/prd/public-api-auth/dd.md)（「アカウントの頁（非公開 repo）」節）と [ADR 0044](https://github.com/fudoki-hensansitu/fudoki/blob/main/docs/adr/0044-separate-web-and-public-api.md)。WorkOS の環境が用意できるまで実装は保留で、今は雛形だけを置いている。
+設計の正本は fudoki の [dd.md](https://github.com/fudoki-hensansitu/fudoki/blob/main/docs/prd/public-api-auth/dd.md)（「アカウントの頁（別 repo）」節）と [ADR 0044](https://github.com/fudoki-hensansitu/fudoki/blob/main/docs/adr/0044-separate-web-and-public-api.md)。
 
 ## ディレクトリ構造
 
 ```
 .
-├── routes/          # Void の route（実装時に作る）
+├── pages/           # 頁（React）。ログイン前の案内と、API Keys widget・ログアウト・退会
+├── routes/          # Void の route。ログイン（/login・/callback）・/logout・/account/delete・/widget-token
+├── server/          # WorkOS の client とセッションの cookie
 ├── docs/            # この repo の設計・判断（tracked）
+├── env.ts           # WorkOS の値の schema（値は .env と Void の secret）
 ├── void.config.ts   # Worker 名（auth）。入口・account は deploy を決めるときに足す
 └── vite.config.ts
 ```
@@ -37,7 +40,8 @@ mise exec -- bun run check   # 型検査
 
 - Bun + TypeScript
 - [Void](https://void.cloud)（Cloudflare Worker `auth`）。`void.lock.json` は Void が生成したら commit する
-- WorkOS AuthKit・API Keys widget（実装時に導入）
+- WorkOS AuthKit（`@workos-inc/node`、セッションは封じた cookie）・API Keys widget（`@workos-inc/widgets`、user scope）
+- Void の pages（`@void/react`）
 
 ## Skills
 

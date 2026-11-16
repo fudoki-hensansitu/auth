@@ -1,0 +1,16 @@
+{
+  "name": "auth",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "prepare": "void prepare",
+    "check": "void prepare && tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "vite": "8.3.6",
+    "void": "1.7.0"
+  }
+}

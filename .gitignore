@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.void/
+.void-wrangler.jsonc
+.wrangler/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+*.log
+.DS_Store

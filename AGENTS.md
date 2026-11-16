@@ -47,7 +47,9 @@ mise exec -- bun run check   # 型検査
 ## Skills
 
 - Void でアプリを作る・CLI を使うとき → `.agents/skills/void/`（`voidzero-dev/void` から skillctrl で取得。取得元と hash は `skills-lock.json`・`.agents/skillctrl/`）。Claude Code へは `.claude/skills/` の相対 symlink で渡す
-- WorkOS（AuthKit・API キー・セッション）を触るとき → `.agents/skills/workos/`、API Keys widget を触るとき → `.agents/skills/workos-widgets/`（どちらも `workos/skills` から skillctrl で取得。取得元と hash は同上）
+- WorkOS（AuthKit・API キー・セッション）を触るとき → `.agents/skills/workos/`、API Keys widget を触るとき → `.agents/skills/workos-widgets/`（どちらも `workos/skills` から skillctrl で取得。取得元と hash は同上、license は `THIRD_PARTY_NOTICES.md`）。skill の本文は手で直さず、repo の前提はここに書く
+  - この repo は yuito が持つ既存の WorkOS 環境を使う。skill が勧める `npx workos@latest install` は実行しない（新しい環境と secret を作り、exact ピン留めの外の CLI を動かすため）。WorkOS の値が手元に無いときは、作ったり推測したりせず yuito に確認する
+  - `ApiKeys` widget は skill の reference に無い。props と scope は `node_modules/@workos-inc/widgets` の型と現行の docs で確かめる。skill の例の版（widgets 1.18・node 10）や pnpm には従わず、依存は bun で exact ピン留めにする
 
 ## レビュー
 

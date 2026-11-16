@@ -30,6 +30,7 @@ mise exec -- bun run check   # 型検査
 ## secret
 
 - 手元で使う secret は root の `fnox.toml` に age で暗号化して commit する（[fnox](https://fnox.jdx.dev/)）。鍵は auth 専用にし、個人の age 鍵を recipient に入れない。鍵の作り方・メンバーや agent の追加・値の登録と rotate は home repo（`fudoki-hensansitu/home`）の secrets skill に従う。今は値が無いので `fnox.toml` も無い
+- repo は public なので、secret だけでなく WorkOS の organization ID・permission 名・client ID などの設定値も tracked なファイルに入れない。実行時に env（Worker の secret・var）で受ける
 - WorkOS の API key・client secret はこの repo に入れない（`fnox.toml` にも入れない）。本番の Worker の secret は Cloudflare に置く。WorkOS のアカウント・環境・secret は yuito が持つ
 
 ## 技術スタック
@@ -41,3 +42,8 @@ mise exec -- bun run check   # 型検査
 ## Skills
 
 - Void でアプリを作る・CLI を使うとき → `.agents/skills/void/`（`voidzero-dev/void` から skillctrl で取得。取得元と hash は `skills-lock.json`・`.agents/skillctrl/`）。Claude Code へは `.claude/skills/` の相対 symlink で渡す
+
+## レビュー
+
+- PR レビューは Pullfrog。PR を開いたときと追加コミットのたびに自動でレビューする。PR の merge で Pullfrog を待たなくてよい
+- 設定の正本は `.github/pullfrog.config.sh`（backend の値は git から見えないので、変えるときはこの script を直して実行する）。model・effort・instructions は org の既定を継承する

@@ -5,6 +5,18 @@
       "skillPath": "packages/void/skills/void/SKILL.md",
       "source": "voidzero-dev/void",
       "sourceType": "github"
+    },
+    "workos": {
+      "computedHash": "ba3896c5c03f42157d5441afd9d3d62b1fcda342a26b847dbacb2419f465501a",
+      "skillPath": "plugins/workos/skills/workos/SKILL.md",
+      "source": "workos/skills",
+      "sourceType": "github"
+    },
+    "workos-widgets": {
+      "computedHash": "19a433d0aabadd9bf9ec2082ee826fd57e2bc29a32f150c7289aac53dfe078ca",
+      "skillPath": "plugins/workos/skills/workos-widgets/SKILL.md",
+      "source": "workos/skills",
+      "sourceType": "github"
     }
   },
   "version": 1

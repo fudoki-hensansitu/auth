@@ -16,6 +16,38 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/voidzero-dev/void.git",
       "updatedAt": "2026-11-16T03:52:49.107Z"
+    },
+    "workos": {
+      "computedHash": "ba3896c5c03f42157d5441afd9d3d62b1fcda342a26b847dbacb2419f465501a",
+      "installedAt": "2026-11-16T06:57:45.140Z",
+      "native": {
+        "computedHash": "ba3896c5c03f42157d5441afd9d3d62b1fcda342a26b847dbacb2419f465501a",
+        "skillPath": "plugins/workos/skills/workos/SKILL.md",
+        "source": "workos/skills",
+        "sourceType": "github"
+      },
+      "skillFolderHash": "f57b7be1310ed59fcbc81a6eee6bf33a19f1658e",
+      "skillPath": "plugins/workos/skills/workos/SKILL.md",
+      "source": "workos/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/workos/skills.git",
+      "updatedAt": "2026-11-16T06:57:45.140Z"
+    },
+    "workos-widgets": {
+      "computedHash": "19a433d0aabadd9bf9ec2082ee826fd57e2bc29a32f150c7289aac53dfe078ca",
+      "installedAt": "2026-11-16T06:57:46.449Z",
+      "native": {
+        "computedHash": "19a433d0aabadd9bf9ec2082ee826fd57e2bc29a32f150c7289aac53dfe078ca",
+        "skillPath": "plugins/workos/skills/workos-widgets/SKILL.md",
+        "source": "workos/skills",
+        "sourceType": "github"
+      },
+      "skillFolderHash": "4ed0d574e6436d440356d79eb32a4802a8e62dfb",
+      "skillPath": "plugins/workos/skills/workos-widgets/SKILL.md",
+      "source": "workos/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/workos/skills.git",
+      "updatedAt": "2026-11-16T06:57:46.449Z"
     }
   },
   "version": 1

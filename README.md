@@ -18,8 +18,8 @@ mise exec -- bun run dev
 
 - AuthKit の認証方法は Google だけを有効にする
 - 全利用者が入る organization（developers）を1つ作る。ログインした利用者はここに入る
-- organization の member の role に `widgets:user-api-keys:manage-self` を与える
-- API キーの permission に `fudoki:read` を作る（風土記の api はこれを持つキーだけを受ける）
+- organization の member の role に、自分の API キーを管理する widget の permission を与える
+- 各サービスの api が受ける API キーの permission を作る（名前は非公開の手順書に置く）
 
 ## License
 

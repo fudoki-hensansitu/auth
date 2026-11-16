@@ -16,6 +16,6 @@ export const GET = defineHandler(async (c) => {
     userId: current.user.id,
     scopes: ['widgets:user-api-keys:manage-self'],
   });
-  c.header('Cache-Control', 'no-store');
-  return { token };
+  // 素の object を返すと Void が context の header を捨て、refresh で回したセッションの cookie も落ちる
+  return c.json({ token }, 200, { 'Cache-Control': 'no-store' });
 });

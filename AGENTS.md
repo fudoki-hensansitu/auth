@@ -13,7 +13,7 @@
 ├── middleware/      # 全応答の header（iframe に埋めさせない）
 ├── server/          # WorkOS の client とセッションの cookie（__Host-）・POST の Origin の検査
 ├── docs/            # この repo の設計・判断（tracked）
-├── env.ts           # WorkOS の値の schema（値は .env と Void の secret）
+├── env.ts           # WorkOS の値の schema（値は fnox と Void の secret）
 ├── void.config.ts   # Worker 名（auth）。入口・account は deploy を決めるときに足す
 └── vite.config.ts
 ```

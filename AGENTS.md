@@ -53,5 +53,5 @@ mise exec -- bun run check   # 型検査
 
 ## レビュー
 
-- PR レビューは Pullfrog。PR を開いたときと追加コミットのたびに自動でレビューする。PR の merge で Pullfrog を待たなくてよい
+- PR レビューは Pullfrog。初回レビューは自動、追加コミットの再レビューは無効。追加レビューは必要時に `@pullfrog` で依頼する。PR の merge で Pullfrog を待たなくてよい
 - 設定の正本は `.github/pullfrog.config.sh`（backend の値は git から見えないので、変えるときはこの script を直して実行する）。model・effort・instructions は org の既定を継承する

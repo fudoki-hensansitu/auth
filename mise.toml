@@ -1,3 +1,5 @@
 [tools]
 bun = "1.4.4"
 node = "24.22.1"
+# workflow は release の発行元 workflow を固定する（mise 2026.9.2 以降で効く）
+fnox = { version = "1.46.0", workflow = "release.yml" }

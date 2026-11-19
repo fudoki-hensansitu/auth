@@ -9,10 +9,10 @@ fudoki-hensansitu のサービス（風土記など）に共通するアカウ�
 ```bash
 mise install
 mise exec -- bun install
-mise exec -- bun run dev
+fnox exec --if-missing error -- mise exec -- bun run dev
 ```
 
-`env.ts` の4つの値（`WORKOS_API_KEY`・`WORKOS_CLIENT_ID`・`WORKOS_COOKIE_PASSWORD`・`WORKOS_DEVELOPERS_ORG_ID`）を、gitignore 済みの `.env` に置きます。WorkOS の Dashboard には、Redirect URI（`<origin>/callback`）・sign-out の戻り先（`<origin>/`）と、widget の CORS に頁の origin を登録します。
+`env.ts` の値（preview の WorkOS）は `fnox.toml` に暗号化してあり、`fnox exec` で起動すると env に入ります。WorkOS の Dashboard には、Redirect URI（`<origin>/callback`）・sign-out の戻り先（`<origin>/`）と、widget の CORS に頁の origin を登録します。
 
 ## WorkOS の準備
 

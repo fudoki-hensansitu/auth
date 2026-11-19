@@ -13,7 +13,7 @@
 ├── middleware/      # 全応答の header（iframe に埋めさせない）
 ├── server/          # WorkOS の client とセッションの cookie（__Host-）・POST の Origin の検査
 ├── docs/            # この repo の設計・判断（tracked）
-├── env.ts           # WorkOS の値の schema（値は .env と Void の secret）
+├── env.ts           # WorkOS の値の schema（値は fnox と Void の secret）
 ├── void.config.ts   # Worker 名（auth）。入口・account は deploy を決めるときに足す
 └── vite.config.ts
 ```
@@ -33,9 +33,9 @@ mise exec -- bun run check   # 型検査
 
 ## secret
 
-- 手元で使う secret は root の `fnox.toml` に age で暗号化して commit する（[fnox](https://fnox.jdx.dev/)）。鍵は auth 専用にし、個人の age 鍵を recipient に入れない。鍵の作り方・メンバーや agent の追加・値の登録と rotate は home repo（`fudoki-hensansitu/home`）の secrets skill に従う。今は値が無いので `fnox.toml` も無い
-- repo は public なので、secret だけでなく WorkOS の organization ID・permission 名・client ID などの設定値も tracked なファイルに入れない。実行時に env（Worker の secret・var）で受ける
-- WorkOS の API key・client secret はこの repo に入れない（`fnox.toml` にも入れない）。本番の Worker の secret は Cloudflare に置く。WorkOS のアカウント・環境・secret は yuito が持つ
+- 手元で使う secret は root の `fnox.toml` に age で暗号化して commit する（[fnox](https://fnox.jdx.dev/)）。鍵は auth 専用にし、個人の age 鍵を recipient に入れない。鍵の作り方・メンバーや agent の追加・値の登録と rotate は home repo（`fudoki-hensansitu/home`）の secrets skill に従う
+- repo は public なので、secret だけでなく WorkOS の organization ID・permission 名・client ID などの設定値も平文では tracked なファイルに入れない。実行時に env（Worker の secret・var）で受ける
+- `fnox.toml` には preview（staging）の WorkOS の値だけを入れる。本番の key・client secret は入れず、Cloudflare の Worker secret に置く。WorkOS のアカウント・環境・secret は yuito が持つ
 
 ## 技術スタック
 

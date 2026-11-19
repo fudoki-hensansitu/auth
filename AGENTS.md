@@ -34,7 +34,7 @@ mise exec -- bun run check   # 型検査
 ## secret
 
 - 手元で使う secret は root の `fnox.toml` に age で暗号化して commit する（[fnox](https://fnox.jdx.dev/)）。鍵は auth 専用にし、個人の age 鍵を recipient に入れない。鍵の作り方・メンバーや agent の追加・値の登録と rotate は home repo（`fudoki-hensansitu/home`）の secrets skill に従う
-- repo は public なので、secret だけでなく WorkOS の organization ID・permission 名・client ID などの設定値も tracked なファイルに入れない。実行時に env（Worker の secret・var）で受ける
+- repo は public なので、secret だけでなく WorkOS の organization ID・permission 名・client ID などの設定値も平文では tracked なファイルに入れない。実行時に env（Worker の secret・var）で受ける
 - `fnox.toml` には preview（staging）の WorkOS の値だけを入れる。本番の key・client secret は入れず、Cloudflare の Worker secret に置く。WorkOS のアカウント・環境・secret は yuito が持つ
 
 ## 技術スタック
